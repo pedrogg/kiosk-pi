@@ -1,0 +1,5 @@
+# El fichero real del token no se versiona JAMAS. Solo el .example.
+board.env
+/etc/board.env
+*.env
+!*.env.example
