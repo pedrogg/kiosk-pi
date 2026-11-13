@@ -15,10 +15,13 @@ for c in chromium chromium-browser; do
 done
 [ -n "$CHROMIUM" ] || { echo "no encuentro chromium ni chromium-browser" >&2; exit 1; }
 
-# El token viaja en la URL solo en esta primera carga: la pagina lo guarda y lo
+# El token viaja en el FRAGMENTO de la URL, que el navegador NUNCA envia al
+# servidor: no aparece en los logs de Cloudflare, ni en nuestro tail, ni en
+# la cabecera Referer hacia terceros (ADR-0041 enmienda 1, 10-11-2026).
+# La pagina lo lee de location.hash, lo guarda y lo
 # retira de la barra. Aun asi queda en el journal si alguien registra argv, por
 # eso la unidad no lo pone en ExecStart y este script no hace `set -x`.
-URL="${BOARD_URL}?k=${BOARD_TOKEN}"
+URL="${BOARD_URL}#k=${BOARD_TOKEN}"
 
 # El perfil es PERSISTENTE a proposito: la pagina cachea la ultima respuesta en
 # localStorage para poder mostrar algo cuando se cae la red. Con --incognito la
