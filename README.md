@@ -9,7 +9,21 @@ agenda del día de una sala.
 
 ## Instalación
 
-Sobre **Raspberry Pi OS Lite** (64 bits) recién grabada, con red y acceso SSH:
+Sobre **Raspberry Pi OS Lite** (64 bits) recién grabada, con red y acceso SSH.
+
+**Hardware probado: Raspberry Pi 3 Model B v1.2** (estreno 12-11-2026). Lo que
+conviene saber antes de montarla:
+
+- **Alimentación micro-USB**, 5 V / **2,5 A** o más. Con menos aparecen avisos
+  de `Undervoltage detected` en consola y la WiFi se cae de forma aleatoria; el
+  cable fino y largo da el mismo síntoma que una fuente floja.
+- **HDMI de tamaño normal** (no micro-HDMI, que es de la Pi 4 en adelante).
+- **WiFi solo 2,4 GHz** y Ethernet a 100 Mbps: si la red del local emite solo en
+  5 GHz, la Pi no la ve. Preguntarlo antes de ir.
+- **1 GB de RAM**: con Chromium pintando la pizarra quedan ~420 MB libres y la
+  placa va a unos 56 °C. Suficiente, pero sin margen para otra cosa.
+- **No tiene reloj**: sin red, la fecha del sistema es la de la imagen. Tenlo en
+  cuenta al leer los registros de un arranque sin conexión.
 
 ```sh
 git clone https://github.com/pedrogg/kiosk-pi.git
